@@ -1,30 +1,17 @@
-package skillbox.com.users.entity;
-
-import jakarta.persistence.*;
+package skillbox.com.users.dto;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "subscriptions", schema = "users_scheme")
-public class SubscriptionEntity {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+public class SubscriptionDto {
     private Integer id;
-
-    @Column(name = "subscribe_date", nullable = false)
     private LocalDate subscribeDate = LocalDate.now();
-
-    @Column(name = "subscriber_id", nullable = false)
     private Integer subscriberId;
-
-    @Column(name = "subscribed_id", nullable = false)
     private Integer subscribedId;
 
-    public SubscriptionEntity() {
+    public SubscriptionDto() {
     }
 
-    public SubscriptionEntity(Integer id, LocalDate subscribeDate, Integer subscriberId, Integer subscribedId) {
+    public SubscriptionDto(Integer id, LocalDate subscribeDate, Integer subscriberId, Integer subscribedId) {
         this.id = id;
         this.subscribeDate = subscribeDate;
         this.subscriberId = subscriberId;
@@ -33,6 +20,10 @@ public class SubscriptionEntity {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public LocalDate getSubscribeDate() {
@@ -57,15 +48,5 @@ public class SubscriptionEntity {
 
     public void setSubscribedId(Integer subscribedId) {
         this.subscribedId = subscribedId;
-    }
-
-    @Override
-    public String toString() {
-        return "SubscriptionEntity{" +
-                "id=" + id +
-                ", subscribeDate=" + subscribeDate +
-                ", subscriberId=" + subscriberId +
-                ", subscribedId=" + subscribedId +
-                '}';
     }
 }

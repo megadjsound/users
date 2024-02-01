@@ -1,30 +1,21 @@
-package skillbox.com.users.entity;
+package skillbox.com.users.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "users", schema = "users_scheme")
-public class UserEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+public class UserDto {
     private Integer id;
     private String name;
     private String login;
-    @Column(name = "gender", nullable = true)
-    @JsonIgnore
     private String gender;
-    private boolean deleted = Boolean.FALSE;
     private String email;
     private String phone;
     private String address;
-    @Column(name = "city_id", nullable = true)
     private Integer cityId;
 
-    public UserEntity() {
+    public UserDto() {
     }
 
-    public UserEntity(Integer id, String name, String login, String gender, String email, String phone, String address, Integer cityId) {
+    public UserDto(Integer id, String name, String login, String gender, String email, String phone,
+                   String address, Integer cityId)
+    {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -37,6 +28,10 @@ public class UserEntity {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,14 +56,6 @@ public class UserEntity {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
     public String getEmail() {
@@ -101,20 +88,5 @@ public class UserEntity {
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
-    }
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", gender='" + gender + '\'' +
-                ", deleted=" + deleted +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", cityId=" + cityId +
-                '}';
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DefaultController {
     @GetMapping("/")
     public String index() {
-        return "Hello world from users service!";
+        return "Subscriptions";
     }
 }
