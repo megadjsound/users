@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    ResponseEntity<Boolean> deleteUser(@PathVariable Integer userId) {
+    public ResponseEntity<Boolean> deleteUser(@PathVariable Integer userId) {
         boolean deleted = userService.deleteUser(userId);
 
         if (!deleted) {
@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}")
-    ResponseEntity<UserDto> getUser(@PathVariable Integer userId) {
+    public ResponseEntity<UserDto> getUser(@PathVariable Integer userId) {
         UserDto userDto = userService.getUser(userId);
 
         if (userDto == null) {

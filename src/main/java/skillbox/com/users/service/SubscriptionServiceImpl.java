@@ -24,7 +24,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public List<SubscriptionDto> getAllSubscriptions() {
         return subscriptionRepository.findAll().stream()
-                .map(this::convertToDto)
+                .map(SubscriptionServiceImpl::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -54,7 +54,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return true;
     }
 
-    private SubscriptionDto convertToDto(SubscriptionEntity  subscriptionEntity) {
+    public static SubscriptionDto convertToDto(SubscriptionEntity  subscriptionEntity) {
 
         if (subscriptionEntity == null) {
             return  null;
@@ -67,7 +67,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         );
     }
 
-    private SubscriptionEntity convertToEntity(SubscriptionDto subscriptionDto) {
+    public static SubscriptionEntity convertToEntity(SubscriptionDto subscriptionDto) {
 
         if (subscriptionDto == null) {
             return null;

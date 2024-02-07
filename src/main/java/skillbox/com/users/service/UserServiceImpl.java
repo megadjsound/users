@@ -1,5 +1,6 @@
 package skillbox.com.users.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
     private final SubscriptionRepository subscriptionRepository;
 
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findByDeletedFalse().stream()
-                .map(this::convertToDto)
+                .map(UserServiceImpl::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -67,12 +69,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUser(Integer id) {
-        return userRepository.findByIdAndDeletedFalse(id)
-                .map(this::convertToDto)
+        return userRepository.findById(id)
+                .map(UserServiceImpl::convertToDto)
                 .orElse(null);
     }
 
-    private UserDto convertToDto(UserEntity userEntity) {
+    public static UserDto convertToDto(UserEntity userEntity) {
 
         if (userEntity == null) {
             return  null;
@@ -82,6 +84,7 @@ public class UserServiceImpl implements UserService {
                 userEntity.getName(),
                 userEntity.getLogin(),
                 userEntity.getGender(),
+                userEntity.isDeleted(),
                 userEntity.getEmail(),
                 userEntity.getPhone(),
                 userEntity.getAddress(),
@@ -89,7 +92,7 @@ public class UserServiceImpl implements UserService {
         );
     }
 
-    private UserEntity convertToEntity(UserDto userDto) {
+    public static UserEntity convertToEntity(UserDto userDto) {
 
         if (userDto == null) {
             return null;
@@ -99,6 +102,7 @@ public class UserServiceImpl implements UserService {
                 userDto.getName(),
                 userDto.getLogin(),
                 userDto.getGender(),
+                userDto.isDeleted(),
                 userDto.getEmail(),
                 userDto.getPhone(),
                 userDto.getAddress(),

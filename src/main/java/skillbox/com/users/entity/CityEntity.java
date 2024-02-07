@@ -38,4 +38,6 @@ public class CityEntity {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 }

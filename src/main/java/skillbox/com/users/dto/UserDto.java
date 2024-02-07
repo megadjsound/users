@@ -5,6 +5,7 @@ public class UserDto {
     private String name;
     private String login;
     private String gender;
+    private boolean deleted = Boolean.FALSE;
     private String email;
     private String phone;
     private String address;
@@ -13,13 +14,13 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(Integer id, String name, String login, String gender, String email, String phone,
-                   String address, Integer cityId)
-    {
+    public UserDto(Integer id, String name, String login, String gender, boolean deleted, String email, String phone,
+                   String address, Integer cityId) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.gender = gender;
+        this.deleted = deleted;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -56,6 +57,14 @@ public class UserDto {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public String getEmail() {

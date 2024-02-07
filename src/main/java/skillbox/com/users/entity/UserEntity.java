@@ -24,11 +24,13 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(Integer id, String name, String login, String gender, String email, String phone, String address, Integer cityId) {
+    public UserEntity(Integer id, String name, String login, String gender, boolean deleted, String email,
+                      String phone, String address, Integer cityId) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.gender = gender;
+        this.deleted = deleted;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -37,6 +39,10 @@ public class UserEntity {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

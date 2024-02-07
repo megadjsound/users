@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 @Service
 public class CityServiceImpl implements CityService{
 
-    //@Autowired
-    //private ModelMapper modelMapper;
     private final CityRepository cityRepository;
 
     public CityServiceImpl(CityRepository cityRepository) {
@@ -22,23 +20,23 @@ public class CityServiceImpl implements CityService{
     @Override
     public List<CityDto> getAllCities() {
         return cityRepository.findAll().stream()
-                .map(this::convertToDto)
+                .map(CityServiceImpl::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    private CityDto convertToDto(CityEntity cityEntity) {
+    public static CityDto convertToDto(CityEntity cityEntity) {
 
-        //return modelMapper.map(cityEntity, CityDto.class);
         if (cityEntity == null) {
             return  null;
         }
         return new CityDto(
+                cityEntity.getId(),
                 cityEntity.getName()
         );
     }
 
-    private CityEntity convertToEntity(CityDto cityDto) {
-        //return modelMapper.map(cityDto, CityEntity.class);
+    public static CityEntity convertToEntity(CityDto cityDto) {
+
         if (cityDto == null) {
             return null;
         }
