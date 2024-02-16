@@ -73,3 +73,25 @@ C:\Users\Megadjsound>docker network inspect db-net
 }
 
 далее настройка рабочего места в PgAdmin и все готово! Rest запросы от Postman работоспособные.
+
+### 1.10 Упаковать сервис в контейнер
+#### Настроить переменные окружения, Вынести в env-переменные параметры подключения к БД (application.yaml)
+![img_5.png](img_5.png)
+
+#### Упаковать сервис в JAR файл (в Gradle -- build), например, users.jar и расположить в тек.директории проекта
+
+#### Создать dockerfile в тек.директории
+
+#### Собрать образ с именем subscription_users в тек.директории
+    docker build -t subscription_users .
+#### Запустить контейнер с привязкой порта 8008
+    docker run --name subscription_users -p 8008:8080 subscription_users
+последние 2 пункта можно запустить файлом docker_build.cmd
+
+![img_4.png](img_4.png)
+
+
+![img_1.png](img_1.png)
+#### Убедиться, что сервис смог подключиться к БД и вы можно получать запросы извне (http://localhost:8008/)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
