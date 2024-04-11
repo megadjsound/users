@@ -7,9 +7,9 @@
     -e POSTGRES_DB=users \
     -e POSTGRES_USER=pguser \
     -e POSTGRES_PASSWORD=pgpass \
-    -v D:/1/postgres-data:/var/lib/postgresql/data \
+    -v C:/1/postgres-data:/var/lib/postgresql/data \
     -p 5001:5432 \
-    -v D:\1:/docker-entrypoint-initdb.d postgres:14
+    -v C:\1:/docker-entrypoint-initdb.d postgres:14
 
 после прогона, в созданной БД users созданы таблицы, индексы, ограничения целостности, а также заполнены все данные.
 ![img.png](images%2Fimg.png)
@@ -73,6 +73,7 @@ C:\Users\Megadjsound>docker network inspect db-net
 }
 
 далее настройка рабочего места в PgAdmin и все готово! Rest запросы от Postman работоспособные.
+![img_6.png](img_6.png)
 
 ### 1.10 Упаковать сервис в контейнер
 #### Настроить переменные окружения, Вынести в env-переменные параметры подключения к БД (application.yaml)

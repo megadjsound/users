@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1.0.0-1" author="vz">
+        <createTable schemaName="users_scheme" tableName="cities" remarks="Справочник городов">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)" remarks="Наименование">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.0-2" author="vz">
+        <insert schemaName="users_scheme" tableName="cities">
+            <column name="name" value="Moscow"/>
+        </insert>
+        <insert schemaName="users_scheme" tableName="cities">
+            <column name="name" value="Himki"/>
+        </insert>
+        <insert schemaName="users_scheme" tableName="cities">
+            <column name="name" value="Sochi"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.0-3" author="vz">
+        <createIndex schemaName="users_scheme" tableName="cities" indexName="cities_name_uidx" unique="true">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

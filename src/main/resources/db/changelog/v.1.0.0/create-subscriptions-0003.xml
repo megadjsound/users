@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1.0.0-11" author="vz">
+        <createSequence schemaName="users_scheme" sequenceName="subscription_id_seq" cycle="false" minValue="1" maxValue="9223372036854775807" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1.0.0-12" author="vz">
+        <createTable schemaName="users_scheme" tableName="subscriptions" remarks="Подписки">
+            <column name="id" type="integer" autoIncrement="true" remarks="Идентификатор">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="subscriber_id" type="integer" remarks="ИД кто подписался">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscribed_id" type="integer" remarks="ИД на кого подписались">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscribe_date" type="date" remarks="Дата подписки">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.0-13" author="vz">
+        <createIndex schemaName="users_scheme" tableName="subscriptions" indexName="subscriptions_subscribed_subscriber_uidx" unique="true">
+            <column name="subscribed_id"/>
+            <column name="subscriber_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="1.0.0-14" author="vz">
+        <createIndex schemaName="users_scheme" tableName="subscriptions" indexName="subscriptions_subscriber_subscribed_uidx" unique="true">
+            <column name="subscriber_id"/>
+            <column name="subscribed_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="1.0.0-15" author="vz">
+        <addForeignKeyConstraint baseColumnNames="subscriber_id" baseTableName="subscriptions"
+                                 baseTableSchemaName="users_scheme" constraintName="subscriptions_subscriber_id_id_fkey" onDelete="CASCADE"
+                                 referencedColumnNames="id" referencedTableName="users"
+                                 referencedTableSchemaName="users_scheme" validate="true"
+        />
+    </changeSet>
+
+    <changeSet id="1.0.0-16" author="vz">
+        <addForeignKeyConstraint baseColumnNames="subscribed_id" baseTableName="subscriptions"
+                                 baseTableSchemaName="users_scheme" constraintName="subscriptions_subscribed_id_id_id_fkey" onDelete="CASCADE"
+                                 referencedColumnNames="id" referencedTableName="users"
+                                 referencedTableSchemaName="users_scheme" validate="true"
+        />
+    </changeSet>
+
+    <changeSet id="1.0.0-17" author="vz">
+        <insert schemaName="users_scheme" tableName="subscriptions">
+            <column name="subscriber_id" value="1"/>
+            <column name="subscribed_id" value="3"/>
+            <column name="subscribe_date" value="2024-04-07"/>
+        </insert>
+        <insert schemaName="users_scheme" tableName="subscriptions">
+            <column name="subscriber_id" value="3"/>
+            <column name="subscribed_id" value="1"/>
+            <column name="subscribe_date" value="2024-04-07"/>
+        </insert>
+        <insert schemaName="users_scheme" tableName="subscriptions">
+            <column name="subscriber_id" value="1"/>
+            <column name="subscribed_id" value="2"/>
+            <column name="subscribe_date" value="2024-04-07"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -2,6 +2,11 @@ server:
   port: 8080
 
 spring:
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: users_scheme
   datasource:
     url: ${DB_URL}
     driver-class-name: org.postgresql.Driver
@@ -14,6 +19,6 @@ spring:
       hibernate:
         default_schema: users_scheme
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: true
     open-in-view: true
